@@ -80,9 +80,12 @@ configure_command_history(){
 }
 
 configure_emacs(){
+if [[ $(hostname) == "cruncher.ttic.edu" ]] ; then 
 EMACS_DIR=/home/zywang/program/emacs-24.4/usr/local/ \
 EMACSDATA=/home/zywang/program/emacs-24.4/usr/local/share/emacs/24.4/etc \
 alias emacs="EMACSLOADPATH=/home/zywang/program/emacs-24.4/usr/local/share/emacs/24.4/lisp /home/zywang/program/emacs-24.4/usr/local/bin/emacs -nw"
+
+fi
 
 alias emacsclient="emacsclient -nw"
 if [[ $TERM == "screen" ]] ; then
