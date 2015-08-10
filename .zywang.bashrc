@@ -1,5 +1,6 @@
 # Auto sync with this file, DO NOT SYNC ON CORP COMPUTERS.
 # Load with the following commands in .bash_profile.
+# TODO: Add user check for shared account. Load the profile if session client is zywang.
 # if [ "$SSH_TTY" ] ; then 
 # (mkdir -p ~/tardis ; cd ~/tardis/ ; git init ; git pull git@github.com:Indicator/tardis.git master)
 # . ~/tardis/.zywang.bashrc ; 
