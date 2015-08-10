@@ -1,7 +1,12 @@
-# auto sync with this file, DO NOT SYNC ON CORP COMPUTERS.
+# Auto sync with this file, DO NOT SYNC ON CORP COMPUTERS.
+# Load with the following commands in .bash_profile.
+# if [ "$SSH_TTY" ] ; then 
+# (mkdir -p ~/tardis ; cd ~/tardis/ ; git init ; git pull git@github.com:Indicator/tardis.git master)
+# . ~/tardis/.zywang.bashrc ; 
+# fi
 # CHECK WHERE IT GOES.
-# wget 
-
+# 
+#
 
 # hex replace in binary , http://everydaywithlinux.blogspot.com/2012/11/patch-strings-in-binary-files-with-sed.html
 function binsed(){ # unfinished.
