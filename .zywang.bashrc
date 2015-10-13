@@ -200,12 +200,25 @@ SGE_JSV_TIMEOUT=2000;
 qlogin -q $node -N .simple 
 }
 
+function configure_gnome_terminal(){
+css=<<VEND
+##TABACTIVE## Do not delete this line.
+TerminalWindow .notebook tab:active {
+    background-color: #6699FF;
+}
+VEND
+if [[ ! -e .config/.gtk-3.0/gtk.css || grep TABACTIVE .config/.gtk-3.0/gtk.css ]] ; then
+echo $css >> .config/.gtk-3.0/gtk.css 
+fi
+
+}
 
 
-### 
+### Main part. 
 
 custom_prompt
 configure_command_history
 configure_emacs
 configure_alias
 configure_key_bind
+configure_gnome_terminal
