@@ -219,14 +219,14 @@ function configure_git(){
 alias gitok='git commit -a -m "ok" '
 if [[ $( grep '\[alias\]' ~/.gitconfig ) == "" ]] ; then
 
-git_aliases=<<VEND
+gitaliases=<<VEND1
 [alias]
 	ci = commit
 	br = branch
 	co = checkout
 	di = diff --color
 	do = diff --name-only
-VEND
+VEND1
 
 echo ${git_aliases} >> ~/.gitconfig
 fi
