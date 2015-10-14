@@ -203,12 +203,12 @@ qlogin -q $node -N .simple
 }
 
 function configure_gnome_terminal(){
-css=<<VEND
+css='
 ##TABACTIVE## Do not delete this line.
 TerminalWindow .notebook tab:active {
     background-color: #6699FF;
 }
-VEND
+'
 if [[ ! -e ~/.config/gtk-3.0/gtk.css || $(grep TABACTIVE ~/.config/gtk-3.0/gtk.css) == "" ]] ; then
 echo $css >> ~/.config/gtk-3.0/gtk.css 
 fi
@@ -219,16 +219,16 @@ function configure_git(){
 alias gitok='git commit -a -m "ok" '
 if [[ $( grep '\[alias\]' ~/.gitconfig ) == "" ]] ; then
 
-gitaliases=<<VEND1
+git_aliases="
 [alias]
 	ci = commit
 	br = branch
 	co = checkout
 	di = diff --color
 	do = diff --name-only
-VEND1
+"
 
-echo ${git_aliases} >> ~/.gitconfig
+echo -e "${git_aliases}" >> ~/.gitconfig
 fi
 
 
