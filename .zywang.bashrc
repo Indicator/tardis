@@ -210,7 +210,7 @@ TerminalWindow .notebook tab:active {
 }
 '
 if [[ ! -e ~/.config/gtk-3.0/gtk.css || $(grep TABACTIVE ~/.config/gtk-3.0/gtk.css) == "" ]] ; then
-echo $css >> ~/.config/gtk-3.0/gtk.css 
+echo -e "$css" >> ~/.config/gtk-3.0/gtk.css 
 fi
 
 }
