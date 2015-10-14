@@ -228,7 +228,7 @@ git_aliases=<<VEND
 	do = diff --name-only
 VEND
 
-echo $git_aliases >> ~/.gitconfig
+echo ${git_aliases} >> ~/.gitconfig
 fi
 
 
@@ -243,3 +243,4 @@ configure_emacs
 configure_alias
 configure_key_bind
 configure_gnome_terminal
+configure_git
