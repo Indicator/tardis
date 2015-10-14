@@ -107,13 +107,14 @@ emacs -nw -q $@
 
 
 configure_alias(){
+ssh_parameter=' -o TCPKeepAlive=no -o ServerAliveInterval=7 '
 alias gitok='git commit -m "ok" -a'
 
 alias rb='sudo /etc/init.d/bluetooth restart'
 alias sshlonghorn='ssh zywang@tg-login.longhorn.tacc.teragrid.org'
 alias sshabe='ssh  zywang2@honest2.ncsa.uiuc.edu'
 alias ssho='ssh zywang@engage-submit.renci.org'
-alias sshc='ssh zywang@cruncher.ttic.edu -L 5901:localhost:5901'
+alias sshc='ssh zywang@cruncher.ttic.edu -L 5901:localhost:5901 ${ssh_parameter}'
 alias sshbigred='ssh tg-zywang@login.bigred.iu.teragrid.org' 
 alias sshcondor='ssh zywang@tg-condor.purdue.teragrid.org' 
 alias sshrx='ssh zywang@raptorx.uchicago.edu'
@@ -214,6 +215,25 @@ fi
 
 }
 
+function configure_git(){
+alias gitok='git commit -a -m "ok" '
+if [[ $( grep '\[alias\]' ~/.gitconfig ) == "" ]] ; then
+
+git_aliases=<<VEND
+[alias]
+	ci = commit
+	br = branch
+	co = checkout
+	di = diff --color
+	do = diff --name-only
+VEND
+
+echo $git_aliases >> ~/.gitconfig
+fi
+
+
+
+}
 
 ### Main part. 
 
