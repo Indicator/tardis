@@ -7,7 +7,9 @@
 # fi
 # CHECK WHERE IT GOES.
 # 
-#
+# TODO: history should first list history commmands ran at the current folder. The command should be organized by the
+# path.
+
 
 # hex replace in binary , http://everydaywithlinux.blogspot.com/2012/11/patch-strings-in-binary-files-with-sed.html
 function binsed(){ # unfinished.
