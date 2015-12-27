@@ -10,7 +10,6 @@
 # TODO: history should first list history commmands ran at the current folder. The command should be organized by the
 # path.
 
-
 # hex replace in binary , http://everydaywithlinux.blogspot.com/2012/11/patch-strings-in-binary-files-with-sed.html
 function binsed(){ # unfinished.
   hexdump -ve '1/1 "%.2X"' file.bin | \
@@ -81,17 +80,20 @@ configure_command_history(){
   export PROMPT_COMMAND="history -a ; history -c; history -r; $PROMPT_COMMAND"
 }
 
-configure_emacs(){
+# Emacs related
+function configure_emacs(){
 if [[ $(hostname) == "cruncher.ttic.edu" ]] ; then 
 EMACS_DIR=/home/zywang/program/emacs-24.4/usr/local/ \
 EMACSDATA=/home/zywang/program/emacs-24.4/usr/local/share/emacs/24.4/etc \
 alias emacs="EMACSLOADPATH=/home/zywang/program/emacs-24.4/usr/local/share/emacs/24.4/lisp /home/zywang/program/emacs-24.4/usr/local/bin/emacs -nw"
-
 fi
+}
 
-alias emacsclient="emacsclient -nw"
+function emacsclient(){
 if [[ $TERM == "screen" ]] ; then
-  alias emacsclient='TERM=xterm emacsclinet -nw'
+  TERM=xterm command emacsclient -nw $@
+else
+  command emacsclient -nw $@
 fi
 }
 
@@ -103,10 +105,27 @@ function emacsserver(){
   fi
 }
 
+function initialize_emacs_server(){
+  server=$1
+  x=$(ps x |grep emacs |grep "server-name \"${server}\"")
+  if [[ $x == "" ]] ; then
+    emacsserver $server
+  fi
+}
+
+function e(){
+  work_env=$(pwd|grep -o "work/:alnum:]_-]*"|sed 's/work\///')
+  # screen-window-name or git branch name?
+  if [[ ${work_env} == "" ]] ; then 
+    work_env="def"
+  fi
+  initialize_emacs_server ${work_env}
+  emacsclient -s ${work_env} $@
+}
+
 function emacslight(){
 emacs -nw -q $@
 }
-
 
 configure_alias(){
 ssh_parameter=' -o TCPKeepAlive=no -o ServerAliveInterval=7 '
@@ -151,9 +170,7 @@ bind '"\e[1;5C": forward-word'
 configure_path(){
 # TODO: clean the path, some are broken on beagle.
 # environment path
-
 export sshx=" -Y -C -c blowfish"
-
 export svndir="https://bleu.uchicago.edu/svn/zywang/"
 export PATH=$HOME/program/emacs-24.4/usr/local/bin/:$PATH
 export PATH=$PATH:/home/wzy/bin/modeller9.9/bin:/share/apps/matlab.bio/bin/:~/work/sdcp/bin/
@@ -229,12 +246,8 @@ git_aliases="
 	di = diff --color
 	do = diff --name-only
 "
-
 echo -e "${git_aliases}" >> ~/.gitconfig
 fi
-
-
-
 }
 
 ### Main part. 
