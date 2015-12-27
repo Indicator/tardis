@@ -4,14 +4,13 @@
 # TODO: Add user check for shared account. Load the profile if session client is zywang.
 # 
 # if [[ $TERM != "screen" ]] ; then 
-# (mkdir -p ~/tardis ; cd ~/tardis/ ; git init ; git pull git@github.com:Indicator/tardis.git master)
+# (mkdir -p ~/tardis ; cd ~/tardis/ ; git init ; git remote add zygithubtardis git@github.com:Indicator/tardis ; git pull zygithubtardis master)
 # . ~/tardis/.zywang.bashrc ; 
 # fi
 # CHECK WHERE IT GOES.
 # 
 # TODO: history should first list history commmands ran at the current folder. The command should be organized by the
 # path.
-
 # hex replace in binary , http://everydaywithlinux.blogspot.com/2012/11/patch-strings-in-binary-files-with-sed.html
 function binsed(){ # unfinished.
   hexdump -ve '1/1 "%.2X"' file.bin | \

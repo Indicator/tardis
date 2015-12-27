@@ -1,21 +1,31 @@
-;; Imported from work computer
+;; Make sure the .emacs has no warning and no error.
+;; .emacs warning when loading will halt emacsserver starting.
 
-(require 'ess-site)
-;; (grok-init)
+;; Global config, working with most emacs versions
+(defmacro with-library (symbol &rest body)
+  `(condition-case nil
+       (progn
+	 (require ',symbol)
+	 ,@body)
+     
+     (error (message (format "I guess we don't have %s available." ',symbol))
+	    nil)))
+
+(defun load-file-if-exists (file-name) 
+  (if (file-exists-p file-name) 
+    (load-file file-name)
+  )
+)
+
 (custom-set-variables '(inhibit-startup-screen t))
 (custom-set-faces)
 (global-set-key [(f5)] 'compile)
 (set 'compile-command "")
-(ess-toggle-underscore nil)
-(require 'color-theme)
-(color-theme-initiliaze)
-(color-theme-calm-forest)
 
 (add-to-list 'auto-mode-alist '("\\.*bashrc\\'" . sh-mode))
 
 ;; scroll line by line
 (setq scroll-step 1)
-;; TODO: autocompletion
 (column-number-mode)
 ;; Fast window move keys
 (global-set-key (kbd "C-x <up>") 'windmove-up)
@@ -23,51 +33,40 @@
 (global-set-key (kbd "C-x <left>") 'windmove-left)
 (global-set-key (kbd "C-x <right>") 'windmove-right)
 
+;; TODO: autocompletion
 
-;; Imported from cruncher.
-;                                                                                                                                                                                                                                    
-(setq diary-file "~/Dropbox/diary")
-(load-file "~/.emacs.d/emacs-keys.el")
-(load-file "~/.emacs.d/programming.el")
-(load "~/.emacs.d/ess-13.09-1/lisp/ess-site.el")
+(if (file-exists-p "~/Dropbox/diary")
+  (setq diary-file "~/Dropbox/diary")
+)
 
-
-
-;; ocaml                                                                                                                                                                                                                             
-(add-to-list 'load-path "/home/zywang/.opam/system/share/tuareg/")
-(load "tuareg-site-file")
-
-;;julia                                                                                                                                                                                                                              
-(add-to-list 'load-path "/home/zywang/program/julia/contrib/")
-(load "julia-mode")
-
+(load-file-if-exists "~/.emacs.d/emacs-keys.el")
+(load-file-if-exists "~/.emacs.d/programming.el")
 
 (global-font-lock-mode t)
-;; enable visual feedback on selections                                                                                                                                                                                              
+;; White background color                                                              ;(set-background-color "white")                                                        
+;; Syntax highlighting:
+(transient-mark-mode t)
+(setq dired-recursive-copies 'always)
+
+;; enable visual feedback on selections
 (setq-default transient-mark-mode t)
  (require 'cc-mode)
  (c-set-offset 'inline-open 0)
  (c-set-offset 'friend '-)
  (c-set-offset 'substatement-open 0)
 
+;; ocaml
+(add-to-list 'load-path "/home/zywang/.opam/system/share/tuareg/")
+(with-library tuareg-site-file)
 
-;;; Other settings:                                                                                                                                                                                                                  
+;;julia
+(add-to-list 'load-path "/home/zywang/program/julia/contrib/")
+(with-library julia-mode)
 
-;; White background color                                                                                                                                                                                                            
-;(set-background-color "white")                                                                                                                                                                                                      
+;(add-hook 'term-mode-hook 'char-line-mode)                                            
 
-;; Syntax highlighting:                                                                                                                                                                                                              
-(global-font-lock-mode t)
-(transient-mark-mode t)
-
-
-;(add-hook 'term-mode-hook 'char-line-mode)                                                                                                                                                                                          
-;;(setq load-path (append load-path (list "/home/zywang/program/ess-12.09-2/lisp")))                                                                                                                                                 
-(setq dired-recursive-copies 'always)
-
-
-(setq load-path (append load-path (list "/home/zywang/program/cscope-15.8a/contrib/xcscope/") ))
-(require 'xcscope)
+(add-to-list 'load-path "/home/zywang/program/cscope-15.8a/contrib/xcscope/")
+(with-library 'xcscope)
 
 (when (>= emacs-major-version 24) 
   (require 'package)
@@ -75,4 +74,15 @@
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 )
 
+;; ESS setup
+;; (require 'ess-site)
+;; (ess-toggle-underscore nil)
+;; (load "~/.emacs.d/ess-13.09-1/lisp/ess-site.el")
 
+
+;; Color theme
+(with-library color-theme
+  (color-theme-initiliaze)
+  (color-theme-calm-forest)
+)
+;; (grok-init)
