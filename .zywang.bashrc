@@ -1,6 +1,8 @@
 # Auto sync with this file, DO NOT SYNC ON CORP COMPUTERS.
-# Load with the following commands in .bash_profile.
+# Load with the following commands in .bash_profile or .bashrc depends if bash is running in login mode, which can be tested by shopt login_shell.
+# 
 # TODO: Add user check for shared account. Load the profile if session client is zywang.
+# 
 # if [[ $TERM != "screen" ]] ; then 
 # (mkdir -p ~/tardis ; cd ~/tardis/ ; git init ; git pull git@github.com:Indicator/tardis.git master)
 # . ~/tardis/.zywang.bashrc ; 
@@ -119,6 +121,7 @@ function e(){
   if [[ ${work_env} == "" ]] ; then 
     work_env="def"
   fi
+  echo ${work_env}
   initialize_emacs_server ${work_env}
   emacsclient -s ${work_env} $@
 }
