@@ -82,7 +82,7 @@
 
 ;; Color theme
 (with-library color-theme
-  (color-theme-initiliaze)
+  (color-theme-initialize)
   (color-theme-calm-forest)
 )
 ;; (grok-init)
