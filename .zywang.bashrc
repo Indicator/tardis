@@ -115,7 +115,7 @@ function initialize_emacs_server(){
 }
 
 function e(){
-  work_env=$(pwd|grep -o "work/:alnum:]_-]*"|sed 's/work\///')
+  work_env=$(pwd|grep -o "work/[[:alnum:]_-]*"|sed 's/work\///')
   # screen-window-name or git branch name?
   if [[ ${work_env} == "" ]] ; then 
     work_env="def"
