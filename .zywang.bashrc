@@ -87,6 +87,8 @@ if [[ $(hostname) == "cruncher.ttic.edu" ]] ; then
 EMACS_DIR=/home/zywang/program/emacs-24.4/usr/local/ \
 EMACSDATA=/home/zywang/program/emacs-24.4/usr/local/share/emacs/24.4/etc \
 alias emacs="EMACSLOADPATH=/home/zywang/program/emacs-24.4/usr/local/share/emacs/24.4/lisp /home/zywang/program/emacs-24.4/usr/local/bin/emacs -nw"
+export EMACSLOADPATH=/home/zywang/program/emacs-24.4/usr/local/share/emacs/24.4/lisp 
+CUSTOM_EMACS_BINARY="/home/zywang/program/emacs-24.4/usr/local/bin/emacs -nw"
 fi
 }
 
@@ -100,7 +102,11 @@ fi
 
 function emacsserver(){
   if [ $# -gt 0 ] ; then
-    emacs -q --eval "(progn (load \"~/.emacs\") (setq server-name \"$1\") (server-start))" --daemon
+      if [[ "$CUSTOM_EMACS_BINARY" != "" ]] ; then
+	 $CUSTOM_EMACS_BINARY -q --eval "(progn (load \"~/.emacs\") (setq server-name \"$1\") (server-start))" --daemon
+      else
+	  emacs -q --eval "(progn (load \"~/.emacs\") (setq server-name \"$1\") (server-start))" --daemon
+      fi
   else
     echo "eamcsserver <server name> "
   fi
