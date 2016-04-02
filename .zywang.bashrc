@@ -89,14 +89,23 @@ EMACSDATA=/home/zywang/program/emacs-24.4/usr/local/share/emacs/24.4/etc \
 alias emacs="EMACSLOADPATH=/home/zywang/program/emacs-24.4/usr/local/share/emacs/24.4/lisp /home/zywang/program/emacs-24.4/usr/local/bin/emacs -nw"
 export EMACSLOADPATH=/home/zywang/program/emacs-24.4/usr/local/share/emacs/24.4/lisp 
 CUSTOM_EMACS_BINARY="/home/zywang/program/emacs-24.4/usr/local/bin/emacs -nw"
+CUSTOM_EMACSCLIENT_BINARY="/home/zywang/program/emacs-24.4/usr/local/bin/emacsclient -nw"
 fi
 }
 
 function emacsclient(){
 if [[ $TERM == "screen" ]] ; then
-  TERM=xterm command emacsclient -nw $@
+    if [[ "$CUSTOM_EMACSCLIENT_BINARY" != "" ]] ; then
+	TERM=xterm $CUSTOM_EMACSCLIENT_BINARY -nw $@
+    else
+	TERM=xterm command emacsclient -nw $@
+    fi
 else
-  command emacsclient -nw $@
+    if [[ "$CUSTOM_EMACSCLIENT_BINARY" != "" ]] ; then
+	$CUSTOM_EMACSCLIENT_BINARY -nw $@
+    else
+	command emacsclient -nw $@
+    fi
 fi
 }
 
@@ -148,6 +157,7 @@ alias sshbigred='ssh tg-zywang@login.bigred.iu.teragrid.org'
 alias sshcondor='ssh zywang@tg-condor.purdue.teragrid.org' 
 alias sshrx='ssh zywang@raptorx.uchicago.edu'
 alias sshrx2='ssh RaptorX@raptorx2.uchicago.edu'
+alias ssh4='ssh zywang@raptorx4.uchicago.edu'
 alias sshg="ssh zywang@gouda.uchicago.edu -X -C -c blowfish"
 alias sshfg="sshfs -o uid=1000 -o gid=1000 -o workaround=rename -o follow_symlinks zywang@gouda.uchicago.edu: /home/wzy/remote/gouda"
 alias sshfb="sshfs -o uid=1000 -o gid=1000 -o workaround=rename -o follow_symlinks zywang@login.beagle.ci.uchicago.edu: /home/wzy/remote/beagle"
@@ -156,6 +166,7 @@ alias ssh3="sshfs fzhao@saw.sharcnet.ca:/work/fzhao/zywang /home/wzy/sharchome"
 alias sshr="ssh zywang@tg-login.ranger.tacc.teragrid.org"
 alias sshp="ssh zywang@login.pads.ci.uchicago.edu"
 alias sshvfs="sshfs -o workaround=rename zywang@velociraptor.tti-c.org: /home/wzy/vrhome"
+alias sshrx4="ssh zywang@raptorx4.uchicago.edu"
 alias lr='ls -lrt'
 alias lt='ls -lrt|tail'
 alias ll='ls -l'
