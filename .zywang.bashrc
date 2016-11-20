@@ -202,6 +202,8 @@ LD_LIBRARY_PATH=/opt/gridengine/lib/lx26-amd64:/opt/openmpi/lib:/home/zywang/pro
 
 export PATH=$PATH:~/work/admodeller/bin:~/work/epmi/bin/
 export PATH=$PATH:/share/apps/matlab/bin/:/home/zywang/perl5/bin:/usr/java/latest/bin:/share/apps/matlab/bin/:/home/zywang/perl5/bin:/usr/java/latest/bin:/home/zywang/perl5/bin:/opt/openmpi/bin:/usr/kerberos/bin:/usr/java/latest/bin:/usr/local/bin:/bin:/usr/bin:/opt/bio/ncbi/bin:/opt/bio/mpiblast/bin/:/opt/bio/hmmer/bin:/opt/bio/EMBOSS/bin:/opt/bio/clustalw/bin:/opt/bio/tcoffee/bin:/opt/bio/phylip/exe:/opt/bio/mrbayes:/opt/bio/fasta:/opt/bio/glimmer/bin://opt/bio/glimmer/scripts:/opt/bio/gromacs/bin:/opt/bio/gmap/bin:/opt/bio/tigr/bin:/opt/bio/autodocksuite/bin:/opt/bio/wgs/bin:/opt/ganglia/bin:/opt/ganglia/sbin:/opt/rocks/bin:/opt/rocks/sbin:/opt/gridengine/bin/lx26-amd64:/home/wzy/bin/modeller9.9/bin:/home/zywang/program/cuda/bin/:/home/zywang/work/sdcp/bin/:/home/zywang/bin:/tmp/zywang_py/parallel/src:/opt/bio/ncbi/bin:/opt/bio/mpiblast/bin/:/opt/bio/hmmer/bin:/opt/bio/EMBOSS/bin:/opt/bio/clustalw/bin:/opt/bio/tcoffee/bin:/opt/bio/phylip/exe:/opt/bio/mrbayes:/opt/bio/fasta:/opt/bio/glimmer/bin://opt/bio/glimmer/scripts:/opt/bio/gromacs/bin:/opt/bio/gmap/bin:/opt/bio/tigr/bin:/opt/bio/autodocksuite/bin:/opt/bio/wgs/bin:/opt/eclipse:/opt/ganglia/bin:/opt/ganglia/sbin:/opt/maven/bin:/opt/pdsh/bin:/opt/rocks/bin:/opt/rocks/sbin:/opt/gridengine/bin/lx26-amd64:/home/wzy/bin/modeller9.9/bin:/home/zywang/program/cuda/bin/:/home/zywang/work/sdcp/bin/:/home/zywang/program/hdf5-1.8.10-linux-x86_64-shared/bin:/home/zywang/parallel/src:/home/zywang/work/dpln/bin/:/home/zywang/bin:/opt/bio/ncbi/bin:/opt/bio/mpiblast/bin/:/opt/bio/hmmer/bin:/opt/bio/EMBOSS/bin:/opt/bio/clustalw/bin:/opt/bio/tcoffee/bin:/opt/bio/phylip/exe:/opt/bio/mrbayes:/opt/bio/fasta:/opt/bio/glimmer/bin://opt/bio/glimmer/scripts:/opt/bio/gromacs/bin:/opt/bio/gmap/bin:/opt/bio/tigr/bin:/opt/bio/autodocksuite/bin:/opt/bio/wgs/bin:/opt/eclipse:/opt/ganglia/bin:/opt/ganglia/sbin:/opt/maven/bin:/opt/pdsh/bin:/opt/rocks/bin:/opt/rocks/sbin:/opt/gridengine/bin/lx26-amd64:/home/wzy/bin/modeller9.9/bin:/home/zywang/program/cuda/bin/:/home/zywang/work/sdcp/bin/:/home/zywang/program/hdf5-1.8.10-linux-x86_64-shared/bin:/home/zywang/parallel/src:/home/zywang/work/dpln/bin/:/home/zywang/program/bin:/home/zywang/program/bin
+
+export PATH=$PATH:~/anaconda3/bin/
 export PERL_MM_USE_DEFAULT=1
 
 }
@@ -278,3 +280,4 @@ configure_alias
 configure_key_bind
 configure_gnome_terminal
 configure_git
+configure_path
