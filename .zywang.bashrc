@@ -167,6 +167,7 @@ alias sshr="ssh zywang@tg-login.ranger.tacc.teragrid.org"
 alias sshp="ssh zywang@login.pads.ci.uchicago.edu"
 alias sshvfs="sshfs -o workaround=rename zywang@velociraptor.tti-c.org: /home/wzy/vrhome"
 alias sshrx4="ssh zywang@raptorx4.uchicago.edu"
+alias sshmarx="ssh marx@171.8.2.146 -p 5910"
 alias lr='ls -lrt'
 alias lt='ls -lrt|tail'
 alias ll='ls -l'
