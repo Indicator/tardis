@@ -145,7 +145,7 @@ emacs -nw -q $@
 }
 
 configure_alias(){
-ssh_parameter=' -o TCPKeepAlive=no -o ServerAliveInterval=7 '
+ssh_parameter=' -o TCPKeepAlive=yes -o ServerAliveInterval=7 '
 alias gitok='git commit -m "ok" -a'
 
 alias rb='sudo /etc/init.d/bluetooth restart'
@@ -167,7 +167,7 @@ alias sshr="ssh zywang@tg-login.ranger.tacc.teragrid.org"
 alias sshp="ssh zywang@login.pads.ci.uchicago.edu"
 alias sshvfs="sshfs -o workaround=rename zywang@velociraptor.tti-c.org: /home/wzy/vrhome"
 alias sshrx4="ssh zywang@raptorx4.uchicago.edu"
-alias sshmarx="ssh marx@171.8.2.146 -p 5910"
+alias sshmarx="ssh marx@171.8.2.146 -p 5910 ${ssh_parameter}"
 alias lr='ls -lrt'
 alias lt='ls -lrt|tail'
 alias ll='ls -l'
