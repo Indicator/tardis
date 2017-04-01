@@ -30,7 +30,6 @@ get_screen_session_name(){
 
 SCREEN_WINDOW=$(get_screen_session_name $(get_screen_pid))-$WINDOW
 
-
 custom_prompt(){
 # host color prompt
 #color_list="\e[1;32m" "\e[1;33m" "\e[1;34m" "\e[1;35m" "\e[1;36m" "\e[1;37m"
@@ -178,6 +177,7 @@ alias matlabbio=/share/apps/matlab.bio/bin/matlab
 alias getctrls='stty -ixon -ixoff'
 alias getecho='stty echo'
 alias qsubi="qsub -q ccm_queue -I -l mppwidth=24 -l walltime=0:0:30:0"
+alias scrn=screen
 
 }
 
