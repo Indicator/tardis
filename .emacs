@@ -33,6 +33,11 @@
 (global-set-key (kbd "C-x <left>") 'windmove-left)
 (global-set-key (kbd "C-x <right>") 'windmove-right)
 
+;; Move forward a word
+(global-set-key (kbd "C-<left>") 'backward-word)
+(global-set-key (kbd "C-<right>") 'forward-word)
+
+
 ;; TODO: autocompletion
 
 (if (file-exists-p "~/Dropbox/diary")
@@ -86,3 +91,5 @@
   (color-theme-calm-forest)
 )
 ;; (grok-init)
+(global-set-key "\M-[1;5C"    'forward-word)      ; Ctrl+right   => forward word
+(global-set-key "\M-[1;5D"    'backward-word)     ; Ctrl+left    => backward word

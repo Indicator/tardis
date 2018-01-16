@@ -18,6 +18,10 @@ function binsed(){ # unfinished.
   xxd -r -p > file.bin.patched
 }
 
+get_ssh_port_forward() {
+    for i in `docker ps |tail -n +2|awk '{print $1}'` ; do ip=`docker inspect -f '{{.NetworkSettings.IPAddress}}' $i` ;  for port in  `docker inspect -f '{{range \$k,\$v:=.NetworkSettings.Ports}}{{\$k}} {{end}}' $i|sed 's/\/tcp//g'` ; do echo -n  '-L' $port:$ip:$port ' '; done  ; done > ~/.sshport_forward_param
+}
+
 get_screen_pid(){
   pstree -p $$|grep -o -P 'screen\(.*?\)'|sed -e 's/screen(\|)//g'
 }
@@ -144,7 +148,7 @@ emacs -nw -q $@
 }
 
 configure_alias(){
-ssh_parameter=' -o TCPKeepAlive=yes -o ServerAliveInterval=7 '
+ssh_parameter=' -o TCPKeepAlive=yes -o ServerAliveInterval=3 '
 alias gitok='git commit -m "ok" -a'
 
 alias rb='sudo /etc/init.d/bluetooth restart'
@@ -166,7 +170,10 @@ alias sshr="ssh zywang@tg-login.ranger.tacc.teragrid.org"
 alias sshp="ssh zywang@login.pads.ci.uchicago.edu"
 alias sshvfs="sshfs -o workaround=rename zywang@velociraptor.tti-c.org: /home/wzy/vrhome"
 alias sshrx4="ssh zywang@raptorx4.uchicago.edu"
-alias sshmarx="ssh marx@171.8.2.146 -p 5910 ${ssh_parameter}"
+alias sshmarx1="ssh marx@171.8.2.146 -p 5910 ${ssh_parameter}"
+alias sshmarx="ssh -A -t 104.199.234.141 ${ssh_parameter} 'ssh -A marx@171.8.2.146 -p 5910 ${ssh_parameter}'"
+alias sshmarx2="ssh -A -t 106.75.119.171 ${ssh_parameter} 'ssh -A marx@171.8.2.146 -p 5910 ${ssh_parameter}'"
+alias sshlocalpower='ssh 192.168.0.26'
 alias lr='ls -lrt'
 alias lt='ls -lrt|tail'
 alias ll='ls -l'
@@ -178,13 +185,12 @@ alias getctrls='stty -ixon -ixoff'
 alias getecho='stty echo'
 alias qsubi="qsub -q ccm_queue -I -l mppwidth=24 -l walltime=0:0:30:0"
 alias scrn=screen
-
 }
 
-configure_key_bind(){
+configure_key_bind() {
 #key-bind for some hosts
-bind '"\e[1;5D": backward-word'
-bind '"\e[1;5C": forward-word'
+    bind '"\e[1;5D": backward-word'
+    bind '"\e[1;5C": forward-word'
 }
 
 configure_path(){
@@ -272,6 +278,12 @@ echo -e "${git_aliases}" >> ~/.gitconfig
 fi
 }
 
+function start_docker(){
+    did=`docker run -d -v /home/zywang/work/future:/home/marx/work/future future_dev`
+    dip=`docker inspect -f "{{.NetworkSettings.IPAddress}}" $did`
+    ssh root@dip -L 8888:localhost:8888 /usr/local/bin/jupyter notebook list
+}
+
 ### Main part. 
 
 custom_prompt
@@ -282,3 +294,4 @@ configure_key_bind
 configure_gnome_terminal
 configure_git
 configure_path
+#. /home/zywang/program/Xilinx/14.7/ISE_DS/settings64.sh
